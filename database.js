@@ -6,7 +6,7 @@ const cors = require('cors');
 const validator = require('validator');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
-const fs = require('fs');  // Add this line at the top of your file
+const fs = require('fs');
 const https = require('https');
 
 const app = express();
@@ -16,18 +16,18 @@ const port = process.env.PORT || 6969;
 app.use(helmet());
 app.use(
   cors({
-    origin: ['https://greenroulette.io', 'https://www.greenroulette.io'], // Allow both domains
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Ensure all methods you use are allowed
-    allowedHeaders: ['Content-Type', 'Authorization'], // Include any custom headers
-    credentials: true, // If you need to send cookies or HTTP auth information
+    origin: ['https://greenroulette.io', 'https://www.greenroulette.io'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
   })
 );
 app.use(bodyParser.json());
 
 // Rate Limiting
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100 // Limit each IP to 100 requests per windowMs
+  windowMs: 15 * 60 * 1000,
+  max: 100
 });
 app.use(limiter);
 
@@ -43,7 +43,7 @@ const validateAndSanitizeInput = (input) => {
 const pool = mysql.createPool({
   host: '127.0.0.1',
   user: 'greenroulette',
-  password: process.env.DB_PASS, // Ensure this is securely stored
+  password: process.env.DB_PASS,
   database: 'greenroulette',
   waitForConnections: true,
   connectionLimit: 10,
@@ -51,12 +51,15 @@ const pool = mysql.createPool({
 });
 
 // Verify MySQL connection
-pool.getConnection()
-  .then(connection => {
+(async () => {
+  try {
+    const connection = await pool.getConnection();
     console.log('Connected to MySQL as ID ' + connection.threadId);
     connection.release();
-  })
-  .catch(err => console.error('Error connecting to MySQL:', err));
+  } catch (err) {
+    console.error('Error connecting to MySQL:', err);
+  }
+})();
 
 // Route to handle adding a new player with parameterized queries
 app.post('/api/add-player', async (req, res) => {
@@ -107,7 +110,7 @@ app.post('/api/update-username', async (req, res) => {
   }
 });
 
-app.post('/api/donations', (req, res) => {
+app.post('/api/donations', async (req, res) => {
   const { userAddress, donationAmountUSD, donationAmountETH, donationDate } = req.body;
 
   const donationInsertSql = `
@@ -132,66 +135,33 @@ app.post('/api/donations', (req, res) => {
     return res.status(400).send('Invalid donation amount');
   }
 
-  pool.getConnection((err, connection) => {
-    if (err) {
-      console.error('Error getting connection:', err);
-      return res.status(500).send('Database connection error');
-    }
+  try {
+    const connection = await pool.getConnection();
+    await connection.beginTransaction();
 
-    connection.beginTransaction(err => {
-      if (err) {
-        console.error('Error beginning transaction:', err);
-        return res.status(500).send('Database transaction error');
+    try {
+      await connection.query(donationInsertSql, [userAddress || null, sanitizedAmountUSD, donationDate]);
+
+      if (userAddress) {
+        await connection.query(playerUpdateSql, [sanitizedAmountETH, userAddress]);
       }
 
-      connection.query(donationInsertSql, [userAddress || null, sanitizedAmountUSD, donationDate], (err, result) => {
-        if (err) {
-          return connection.rollback(() => {
-            console.error('Error inserting donation:', err);
-            res.status(500).send('Error recording donation');
-          });
-        }
-
-        // Only proceed with updating the player's total_donated if userAddress is provided
-        if (userAddress) {
-          connection.query(playerUpdateSql, [sanitizedAmountETH, userAddress], (err, result) => {
-            if (err) {
-              return connection.rollback(() => {
-                console.error('Error updating player total donated:', err);
-                res.status(500).send('Error updating total donated');
-              });
-            }
-
-            connection.commit(err => {
-              if (err) {
-                return connection.rollback(() => {
-                  console.error('Error committing transaction:', err);
-                  res.status(500).send('Transaction commit error');
-                });
-              }
-
-              res.send('Donation recorded and total donated updated successfully');
-            });
-          });
-        } else {
-          // Commit transaction if no user address to update
-          connection.commit(err => {
-            if (err) {
-              return connection.rollback(() => {
-                console.error('Error committing transaction:', err);
-                res.status(500).send('Transaction commit error');
-              });
-            }
-
-            res.send('Anonymous donation recorded successfully');
-          });
-        }
-      });
-    });
-  });
+      await connection.commit();
+      res.send(userAddress ? 'Donation recorded and total donated updated successfully' : 'Anonymous donation recorded successfully');
+    } catch (error) {
+      await connection.rollback();
+      console.error('Error in donation transaction:', error);
+      res.status(500).send('Error processing donation');
+    } finally {
+      connection.release();
+    }
+  } catch (error) {
+    console.error('Error getting database connection:', error);
+    res.status(500).send('Database connection error');
+  }
 });
 
-app.get('/api/get_donations', (req, res) => {
+app.get('/api/get_donations', async (req, res) => {
   const sql = `
   SELECT 
     donations.donation_date, 
@@ -209,18 +179,17 @@ app.get('/api/get_donations', (req, res) => {
   LIMIT 10
 `;
 
-  pool.query(sql, (err, results) => {
-    if (err) {
-      console.error('Error fetching donations:', err);
-      res.status(500).send('Error fetching donations');
-    } else {
-      res.json(results);
-    }
-  });
+  try {
+    const [results] = await pool.query(sql);
+    res.json(results);
+  } catch (error) {
+    console.error('Error fetching donations:', error);
+    res.status(500).send('Error fetching donations');
+  }
 });
 
 // Endpoint to get top donators
-app.get('/api/top-donators', (req, res) => {
+app.get('/api/top-donators', async (req, res) => {
   const sql = `
     SELECT address, username, total_donated 
     FROM players 
@@ -228,17 +197,17 @@ app.get('/api/top-donators', (req, res) => {
     ORDER BY total_donated DESC 
     LIMIT 100;
   `;
-  pool.query(sql, (err, results) => {
-    if (err) {
-      console.error('Error fetching top donators:', err);
-      return res.status(500).send('Error fetching top donators');
-    }
+  try {
+    const [results] = await pool.query(sql);
     res.json(results);
-  });
+  } catch (error) {
+    console.error('Error fetching top donators:', error);
+    res.status(500).send('Error fetching top donators');
+  }
 });
 
 // Endpoint to get top winners
-app.get('/api/top-winners', (req, res) => {
+app.get('/api/top-winners', async (req, res) => {
   const sql = `
     SELECT address, username, total_win 
     FROM players 
@@ -246,50 +215,48 @@ app.get('/api/top-winners', (req, res) => {
     ORDER BY total_win DESC 
     LIMIT 100;
   `;
-  pool.query(sql, (err, results) => {
-    if (err) {
-      console.error('Error fetching top winners:', err);
-      return res.status(500).send('Error fetching top winners');
-    }
+  try {
+    const [results] = await pool.query(sql);
     res.json(results);
-  });
+  } catch (error) {
+    console.error('Error fetching top winners:', error);
+    res.status(500).send('Error fetching top winners');
+  }
 });
 
 // Endpoint to get total amount donated
-app.get('/api/total_donated', (req, res) => {
+app.get('/api/total_donated', async (req, res) => {
   const sql = `SELECT total_amount FROM total_donations;`;
   
-  pool.query(sql, (err, results) => {
-    if (err) {
-      console.error('Error fetching total amount donated:', err);
-      return res.status(500).send('Error fetching total amount donated');
-    }
+  try {
+    const [results] = await pool.query(sql);
     res.json(results);
-  });
+  } catch (error) {
+    console.error('Error fetching total amount donated:', error);
+    res.status(500).send('Error fetching total amount donated');
+  }
 });
 
 // Endpoint to get the username given an address
-app.get('/api/get_username/:address', (req, res) => {
+app.get('/api/get_username/:address', async (req, res) => {
   const { address } = req.params;
 
   const sql = `SELECT username FROM players WHERE address = ? LIMIT 1`;
 
-  pool.query(sql, [address], (err, results) => {
-    if (err) {
-      console.error('Error fetching username:', err);
-      return res.status(500).json({ error: 'Error fetching username' });
-    }
-
+  try {
+    const [results] = await pool.query(sql, [address]);
     if (results.length === 0) {
       return res.status(404).json({ message: 'Username not found for the given address' });
     }
-
     res.json({ username: results[0].username });
-  });
+  } catch (error) {
+    console.error('Error fetching username:', error);
+    res.status(500).json({ error: 'Error fetching username' });
+  }
 });
 
 // Endpoint to set the partner contribution for a user
-app.post('/api/set_partner_contribution', (req, res) => {
+app.post('/api/set_partner_contribution', async (req, res) => {
   const { address, contribution } = req.body;
 
   if (!address || contribution === undefined) {
@@ -307,22 +274,20 @@ app.post('/api/set_partner_contribution', (req, res) => {
     WHERE address = ?
   `;
 
-  pool.query(sql, [sanitizedContribution, address], (err, result) => {
-    if (err) {
-      console.error('Error updating partner contribution:', err);
-      return res.status(500).json({ error: 'Error updating partner contribution' });
-    }
-
+  try {
+    const [result] = await pool.query(sql, [sanitizedContribution, address]);
     if (result.affectedRows === 0) {
       return res.status(404).json({ error: 'Player not found' });
     }
-
     res.json({ message: 'Partner contribution updated successfully' });
-  });
+  } catch (error) {
+    console.error('Error updating partner contribution:', error);
+    res.status(500).json({ error: 'Error updating partner contribution' });
+  }
 });
 
 // Endpoint to get all partners and their contribution amounts
-app.get('/api/get_all_partners', (req, res) => {
+app.get('/api/get_all_partners', async (req, res) => {
   const sql = `
     SELECT address, username, partner_contribution
     FROM players
@@ -330,24 +295,22 @@ app.get('/api/get_all_partners', (req, res) => {
     ORDER BY partner_contribution DESC
   `;
 
-  pool.query(sql, (err, results) => {
-    if (err) {
-      console.error('Error fetching partners:', err);
-      return res.status(500).json({ error: 'Error fetching partners' });
-    }
-
+  try {
+    const [results] = await pool.query(sql);
     const partners = results.map(row => ({
       address: row.address,
       username: row.username || 'Anonymous',
       contribution: parseFloat(row.partner_contribution)
     }));
-
     res.json({ partners });
-  });
+  } catch (error) {
+    console.error('Error fetching partners:', error);
+    res.status(500).json({ error: 'Error fetching partners' });
+  }
 });
 
 // Endpoint to revoke partnership
-app.post('/api/remove_partner', (req, res) => {
+app.post('/api/remove_partner', async (req, res) => {
   const { address } = req.body;
 
   if (!address) {
@@ -360,18 +323,16 @@ app.post('/api/remove_partner', (req, res) => {
     WHERE address = ?
   `;
 
-  pool.query(sql, [address], (err, result) => {
-    if (err) {
-      console.error('Error revoking partnership:', err);
-      return res.status(500).json({ error: 'Error revoking partnership' });
-    }
-
+  try {
+    const [result] = await pool.query(sql, [address]);
     if (result.affectedRows === 0) {
       return res.status(404).json({ error: 'Partner not found' });
     }
-
     res.json({ message: 'Partner removed successfully' });
-  });
+  } catch (error) {
+    console.error('Error revoking partnership:', error);
+    res.status(500).json({ error: 'Error revoking partnership' });
+  }
 });
 
 const httpsOptions = {
