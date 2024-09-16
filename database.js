@@ -39,7 +39,7 @@ const validateAndSanitizeInput = (input) => {
 // Create a MySQL connection pool with better error handling
 const pool = mysql.createPool({
   host: '127.0.0.1',
-  user: 'root',
+  user: 'greenroulette',
   password: process.env.DB_PASS, // Ensure this is securely stored
   database: 'greenroulette',
   waitForConnections: true,
