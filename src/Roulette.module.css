@@ -1,0 +1,52 @@
+.roulette {
+    width: 100%;  /* Adjusts width to take the full width of its container */
+    max-width: 400px;  /* Keeps the actual element from getting too wide */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+    display: flex;  /* Using flex to better control inner layout */
+    flex-direction: column;  /* Ensures elements inside are stacked vertically */
+    align-items: center;  /* Centers items horizontally */
+  }
+  
+  .title {
+    color: #4ca14e;
+    text-shadow: #000000 0.5px 0.5px 2px;
+    margin-bottom: 20px;
+    text-align: center; /* Centers the title text */
+  }
+  
+  .inputGroup {
+    width: 100%; /* Ensures input group takes the full width of its container */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input, .button {
+    width: 100%; /* Ensures inputs and button take the full width of their container */
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-sizing: border-box; /* Includes padding and border in the element's total width */
+  }
+  
+  .input {
+    border: 1px solid #ccc;
+  }
+  
+  .button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    background-color: #45a049;
+  }
+  
+  .message {
+    margin-top: 20px;
+  }
+  

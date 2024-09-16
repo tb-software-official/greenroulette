@@ -1,0 +1,83 @@
+.content {
+  box-shadow: none;
+  width: 600px;
+  height: 140px;
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+#arrow {
+  position: absolute;
+  left: 0; 
+  right: 0; 
+  margin-left: auto; 
+  margin-right: auto; 
+  width: 56px; /* Need a specific value to work */
+}
+
+.rouletteContainer {
+  display: flex;
+  width: 700px; /* Adjust based on your design */
+  margin-top: 45px;
+
+  position: relative;
+}
+
+.tile {
+  width: 108px; /* Adjust based on your design */
+  height: 88px; /* Adjust based on your design */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: right;
+  margin-left: 25px;
+}
+
+.numberLabel {
+  position: absolute;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 55px;
+  line-height: 150%;
+
+  color: white;
+
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+
+#red {
+  background: linear-gradient(0deg, #FFFFFF, #CA0000);
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 3px transparent;
+}
+
+#black {
+  background: linear-gradient(0deg, #FFFFFF, #171717);
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 3px transparent;
+}
+
+#zero {
+  background: linear-gradient(0deg, #CDFFBB, #00C2FF);
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 3px transparent;
+}
+/* 
+@keyframes slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-4921px);
+  }
+}
+
+.rouletteContainer {
+  animation: slide 5s ease-in-out;
+} */
+
+/* .stopped {
+  animation-play-state: paused;
+} */

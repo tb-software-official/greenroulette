@@ -1,0 +1,67 @@
+.content {
+  height: 130px;
+  text-align: center;
+  align-items: center;
+  height: 150px;
+}
+
+#header {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 150%;
+  margin: 0 0;
+}
+
+#connect {
+  padding: 8px 16px;
+
+  margin: 5px auto;
+
+  background: linear-gradient(180deg, #CDFFBB 0%, #00C2FF 100%);
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+
+  font-style: normal;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 150%;
+
+  color: #FFFFFF;
+
+  border: none;
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  transition: box-shadow 0.3s ease;
+}
+
+#connect:hover{
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+}
+
+.mm_logo {
+  width: 40px;
+  position: relative;
+  margin-right: 10px;
+}
+
+#browsers {
+  margin-top: 15px;
+}
+
+.browserLogo {
+  position: relative;
+  left: -12.5px;
+
+  width: 60px;
+  margin-left: 25px;
+
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.25));
+}
+
+.browserLogo:hover {
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.5));
+}

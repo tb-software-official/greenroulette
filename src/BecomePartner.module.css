@@ -1,0 +1,418 @@
+/* BecomePartner.module.css */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  padding: 0;
+  overflow: scroll;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow-x: hidden; /* Disables horizontal scrolling */
+  overflow-y: auto; /* Enables vertical scrolling */
+}
+
+.pageContainer {
+  background-color: white;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  padding: 10px; /* Add padding for better spacing around items */
+  background: linear-gradient(180deg, #FFDA7A 0%, #FFFFFF 100%);
+  height: 300px;
+}
+
+.buttonGroup {
+  display: flex; /* Aligns buttons in a row */
+}
+
+.buttonGroup button {
+  background: rgba(205, 255, 187, 0.01);
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+
+  margin-top: 10px;
+
+  margin-left: 10px; /* Spacing between buttons */
+  padding: 8px 16px; /* Padding inside buttons */
+  border: none; /* Remove default border */
+  border-radius: 10px; /* Rounded corners */
+  cursor: pointer; /* Cursor indicates button */
+
+  /* Small text */
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 150%;
+  /* identical to box height, or 24px */
+  display: flex;
+  align-items: center;
+
+  -webkit-text-stroke: 0.5px black;
+  color: #FFFFFF;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Aligns items vertically in the center */
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  top: -200px;
+}
+
+.slogan {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 50px;
+  line-height: 150%;
+
+  color: #CDFFBB;
+  -webkit-text-stroke: 1px #000000;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  margin: 0;
+}
+
+.info {
+  margin-top: 30px;
+  width: 1100px;
+  background: #F2F2F2;
+  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  padding: 20px;
+  padding-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#distinguish {
+  background: linear-gradient(180deg, #FF7676 0%, #FFCF54 100%);
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-text-stroke: 1px #FFFFFF;
+  text-shadow: none;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.infoText {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 22px;
+  line-height: 150%;
+
+  color: #000000;
+
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+#partnerCount {
+  background: linear-gradient(180deg, #FF7676 38%, #FFCF54 78%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+
+  -webkit-text-stroke: 0.5px #000000;
+}
+
+.partnerLink {
+  margin-top: 0px;
+}
+
+.small {
+  font-size: 18px;
+}
+
+button {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #82C0B9;
+}
+
+.title {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 35px;
+  line-height: 150%;
+  text-align: center;
+
+  background: linear-gradient(180deg, #2F2F2F 38%, #000000 78%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.stats {
+  background: linear-gradient(180deg, rgba(0, 194, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%);
+  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 600px;
+  height: 200px;
+}
+
+.stats > div:first-child {
+  margin-top: 0px;
+}
+
+.stats > div > p {
+  margin-top: 30px;
+}
+
+.ethLogo {
+  width: 12px; /* Adjust size as needed */
+  height: auto;
+  margin-left: 5px;
+  vertical-align: middle; /* Aligns with the middle of the text */
+  position: relative;
+  top: -2px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.ethAmount { 
+  background: linear-gradient(180deg, #79e7e7 38%, #48cbd9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+
+  font-weight: 500;
+
+  -webkit-text-stroke: 0.6px black;
+  filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25));
+}
+
+.floatRight {
+  text-align: right;
+  position: relative;
+  top: 5px;
+}
+
+.benefits {
+  background: linear-gradient(180deg, #CDFFBB 0%, rgba(255, 255, 255, 0.5) 100%);
+
+  width: 600px;
+  height: 320px;
+}
+
+.benefitsList,
+.benefitsList ul {
+  list-style-type: none;
+}
+
+.benefitCategory {
+  margin-top: 10px;
+}
+
+#subtext {
+  font-style: normal;
+  font-size: 12px;
+
+  background: linear-gradient(180deg, #CDFFBB 0%, rgba(0, 194, 255, 0.75) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+
+  -webkit-text-stroke: 0.25px black;
+}
+
+.risks {
+  background: linear-gradient(180deg, #FFCF54 0%, rgba(255, 255, 255, 0.5) 100%);
+
+  width: 800px;
+  height: 900px;
+
+  text-align: center;
+}
+
+.risks > p {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.button {
+  padding: 8px 16px;
+  margin-top: 20px;
+
+  background: linear-gradient(180deg, #42924A 0%, #FFFFFF 100%);
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+
+  font-style: normal;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 150%;
+
+  color: #FFFFFF;
+
+  -webkit-text-stroke: 1px #000000;
+
+  border: none;
+
+  transition: transform 0.3s ease;
+  transform: box-shadow 0.3s ease;
+}
+
+.button:hover {
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
+}
+
+.button:active {
+  box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.4);
+  transform: translateY(-3px);
+}
+
+#revokePartnership {
+  background: linear-gradient(180deg, #5d00ff 0%, #FFFFFF 100%);
+}
+
+
+.calculator {
+  background: linear-gradient(180deg, #FFCF54 0%, #FF7676 100%);
+
+  margin-top: 20px;
+
+  width: 600px;
+  height: 500px;
+}
+
+.calculatorContent {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.calculatorRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.earningsAmounts {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.earningsAmounts {
+  text-align: right;
+}
+
+.earningsList li, .earningsAmounts li {
+  margin-bottom: 5px;
+}
+
+#becomePartner {
+  margin-top: 40px;
+
+  background: linear-gradient(180deg, #FF7676 0%, #FFCF54 100%);
+  border-radius: 10px;
+
+  font-style: normal;
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 150%;
+
+  color: #FFFFFF;
+
+  -webkit-text-stroke: 1px #000000;
+
+  border: none;
+}
+
+.alreadyPartner {
+  margin-top: 20px;
+  background: linear-gradient(180deg, #FF7676 0%, #FFCF54 100%);
+}
+
+/* FOOTBAR */
+.footbar {
+  width: 100%;
+  background: white;
+  display: flex;
+  align-items: center; /* Aligns items vertically in the center */
+  justify-content: space-between; /* Puts maximum space between flex items */
+}
+
+.footbarButton {
+  border-radius: 100px;
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5) !important;
+}
+
+.footbar > .buttonGroup:last-child {
+  margin-right: 10px;
+}
+
+/* DASHBOARD */
+.dashboard {
+  height: 700px;
+}
+
+.contributionSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: -20px;
+}
+
+.contributionTitle {
+  font-size: 34px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.contributionInput {
+  width: 80%;
+  max-width: 300px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.warning {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+  border: 1px solid red;
+  border-radius: 5px;
+  padding: 5px;
+  display: none;
+}
+
+.warning:not(:empty) {
+  display: block;
+}

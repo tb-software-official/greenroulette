@@ -1,0 +1,56 @@
+/* CountdownCircle.module.css */
+.countdownContainer {
+  width: 75px; /* Increase size for better visibility */
+  height: 75px; /* Increase size for better visibility */
+  display: flex; /* Centering SVG inside the div */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  margin: auto; /* Additional centering if used within a larger context */
+  position: relative; /* Needed for shadow positioning */
+  filter: drop-shadow(0px 4px 4px rgb(0 0 0 / 0.4));
+}
+
+.countdownCircle {
+  width: 100%;
+  height: 100%;
+}
+
+.circleBg {
+  fill: none;
+  stroke: #eee;
+  stroke-width: 6;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.circle {
+  fill: none;
+  stroke-width: 6;
+  stroke-linecap: round;
+  transition-property: stroke-dasharray;
+}
+
+.fadeOut {
+  animation: fadeout 1s forwards; /* Use forwards to keep the final state */
+}
+
+.fadeIn {
+  animation: fadein 1s forwards; /* Use forwards to keep the final state */
+}
+
+@keyframes fadeout {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,915 @@
+/* LandingPage.module.css */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  padding: 0;
+  overflow: scroll;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow-x: hidden; /* Disables horizontal scrolling */
+  overflow-y: auto; /* Enables vertical scrolling */
+}
+
+
+/* PAGE 1 */
+.page1 {
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  background: linear-gradient(180deg, #CDFFBB 0%, #FFDA7A 100%);
+}
+
+.header {
+  display: flex;
+  align-items: center; /* Aligns items vertically in the center */
+  justify-content: space-between; /* Puts maximum space between flex items */
+  padding: 10px; /* Add padding for better spacing around items */
+}
+
+.buttonGroup {
+  display: flex; /* Aligns buttons in a row */
+}
+
+.buttonGroup button {
+  background: rgba(205, 255, 187, 0.01);
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+
+  margin-top: 10px;
+
+  margin-left: 10px; /* Spacing between buttons */
+  padding: 8px 16px; /* Padding inside buttons */
+  border: none; /* Remove default border */
+  border-radius: 10px; /* Rounded corners */
+  cursor: pointer; /* Cursor indicates button */
+
+  /* Small text */
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 150%;
+  /* identical to box height, or 24px */
+  display: flex;
+  align-items: center;
+
+  -webkit-text-stroke: 0.5px black;
+  color: #FFFFFF;
+}
+
+.main {
+  height: 80%;
+  display: flex;
+  align-items: center; /* Aligns items vertically in the center */
+  justify-content: space-between; /* Puts maximum space between flex items */
+  max-width: 2000px;
+  margin: 0 auto;
+}
+
+.info {
+  margin-left: 100px;
+  height: 450px;
+}
+
+.slogan {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 60px;
+  line-height: 150%;
+
+  color: #CDFFBB;
+  -webkit-text-stroke: 1px #000000;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  margin: 0;
+}
+
+#distinguish {
+  background: linear-gradient(180deg, #00C2FF 0%, #CDFFBB 100%);
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-text-stroke: 1px #FFFFFF;
+  text-shadow: none;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.infoText {
+  width: 90%;
+
+  font-style: normal;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 150%;
+
+  color: #000000;
+
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.donationAmount {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 150%;
+
+  background: linear-gradient(90deg, #CDFFBB 0%, #00C2FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+
+  -webkit-text-stroke: 1px #000000;
+  filter: drop-shadow(-1px 0px 0px rgba(0, 0, 0, 1))
+          drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  text-shadow: none;
+}
+
+#layer {
+  position: relative;
+  top: 0px;
+  left: -78px;
+}
+
+#startPlaying {
+  padding: 8px 16px;
+  margin-top: 20px;
+
+  background: linear-gradient(180deg, #CDFFBB 0%, #00C2FF 100%);
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+
+  font-style: normal;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 150%;
+
+  color: #FFFFFF;
+
+  -webkit-text-stroke: 1px #000000;
+
+  border: none;
+
+  transition: transform 0.3s ease;
+  transform: box-shadow 0.3s ease;
+}
+
+#becomePartner {
+  padding: 8px 16px;
+  margin-top: 20px;
+  margin-left: 20px;
+
+  /* Create a gradient background */
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 183, 0, 0.25) 100%);
+  
+  /* Remove the box-shadow */
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+  
+  border-radius: 12px; /* Increased to account for padding */
+
+  font-style: normal;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 150%;
+
+  color: #FFFFFF;
+  -webkit-text-stroke: 1px #000000;
+
+  border: none;
+  position: relative;
+  
+  transition: transform 0.3s ease;
+  transform: box-shadow 0.3s ease;
+}
+
+#startPlaying:hover, #becomePartner:hover{
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
+}
+
+.visual {
+  position: relative;
+  height: 500px;
+  width: 100%;
+}
+
+.elements {
+  position: relative;
+  top: 60%; 
+  left: 50%; 
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+}
+
+.backCoin, .middleCoin, .frontCoin, .hearts {
+  position: absolute;
+}
+
+.earth {
+  width: 500px;
+  height: 500px;
+}
+
+.backCoin {
+  left: 240px;
+  top: 80px;
+  z-index: -1;
+  animation: waveBackCoin 4s ease-in-out infinite;
+}
+
+.middleCoin {
+  left: 280px;
+  top: 80px;
+  animation: waveMiddleCoin 4s ease-in-out infinite;
+}
+
+.frontCoin {
+  left: 310px;
+  top: 90px;
+  animation: waveFrontCoin 4s ease-in-out infinite;
+}
+
+.hearts {
+  left: 40px;
+  bottom: 40px;
+  animation: floatHearts 4s ease-in-out infinite;
+}
+
+button {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #82C0B9;
+}
+
+
+@keyframes floatHearts {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes waveBackCoin {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-25px); }
+}
+
+@keyframes waveMiddleCoin {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes waveFrontCoin {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* PAGE 2 */
+.page2 {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: -2;
+  background: linear-gradient(180deg, #FFDA7A 0%,#CDFFBB 100%);
+  position: relative;
+}
+
+.charitySectionInfo {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin-left: 50px;
+}
+
+.sectionHeader {
+  margin-bottom: 20px;
+
+  font-style: normal;
+  font-weight: 800;
+  font-size: 55px;
+  line-height: 150%;
+  
+  color: #CDFFBB;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  -webkit-text-stroke: 1px #000000;
+}
+
+#charityInfo {
+  font-size: 20px;
+}
+
+.wrapper {
+  min-width: 713.5px;
+  height: 500px;
+  min-height: 500px;
+  position: relative;
+  z-index: 10;
+}
+
+.cardContainer {
+  height: 100%;
+  width: 713.5px;
+  background: linear-gradient(180deg, rgba(0, 194, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  position: relative;
+  z-index: initial;
+  margin-left: 50px;
+}
+
+.cardWrapper {
+  position: relative;
+  width: 713.5px;
+  height: 80%;
+  overflow: hidden; /* To keep absolute elements inside */
+}
+
+.cards {
+  height: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  position: relative;
+}
+
+.goLeftAnimation {
+  animation: slideLeft 5s forwards;
+}
+
+@keyframes slideLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-350px); }
+}
+
+.middleCoin2, .frontCoin2, .hearts2 {
+  position: relative;
+}
+
+.hearts2 {
+  animation: floatHearts 4s ease-in-out infinite;
+  top: -80px;
+  left: -425px;
+}
+
+.middleCoin2 {
+  animation: waveMiddleCoin 4s ease-in-out infinite;
+  position: relative;
+  top: -610px;
+  left: 480px;
+  z-index: -1;
+}
+
+.frontCoin2 {
+  animation: waveFrontCoin 4s ease-in-out infinite;
+  top: -590px;
+  left: 415px;
+}
+
+/* PAGE 3 */
+.page3 {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(180deg, #CDFFBB 0%, #FFFFFF 100%);
+  z-index: -100;
+}
+
+#champion {
+  background: linear-gradient(180deg, #FFE39A 10%, #FFCB46 100%);
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+#topDonator {
+  background: linear-gradient(180deg, #CDFFBB 10%, #00C2FF 100%);
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.leaderboardText {
+  width: 65%;
+
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 150%;
+
+  margin-bottom: 40px;
+
+  color: #000000;
+
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.leaderboards {
+  width: 900px;
+  height: 50%;
+  min-height: 500px;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.leaderboard {
+  min-width: 402px;
+  min-height: 100%;
+
+  background: #EAEAEA;
+  border: 1px solid #E0E0E0;
+  box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.25), inset 0px 0px 4px rgba(0, 0, 0, 0.25);
+
+  align-items: center;
+}
+
+.leaderboardHeader {
+  background: #00C2FF;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 150%;
+
+  width: 100%;
+}
+
+.leaderboardHeaderText {
+  text-align: center;
+  -webkit-text-stroke: 0.75px black;
+}
+
+.topEntry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 85%;
+  margin-top: 20px;
+}
+
+.medal {
+  transform: scale(1.5);
+  width: 75px;
+}
+
+.medal2 {
+  transform: scale(1.5);
+  width: 75px;
+}
+
+.entryInfo {
+  width: 250px;
+}
+
+.entryAddress {
+  font-weight: 500;
+  font-size: 35px;
+
+  background: linear-gradient(180deg, #fceabd 38%, #FFCB46 78%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25));
+
+  -webkit-text-stroke: 0.5px black;
+}
+
+
+.entryAmount {
+  font-weight: 400;
+  font-size: 20px;
+  background: linear-gradient(180deg, #79e7e7 38%, #48cbd9 78%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+
+  -webkit-text-stroke: 0.5px black;
+  filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25));
+}
+
+.regularAmount {
+  background: linear-gradient(180deg, #79e7e7 38%, #48cbd9 78%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-text-stroke: 0.5px black;
+}
+
+.top {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.entryAddress2 {
+  font-weight: 400;
+  font-size: 30px;
+
+  color: white;
+  filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25));
+  -webkit-text-stroke: 0.5px black;
+}
+
+.regularEntries {
+  width: 85%;
+  height: 44%;
+  overflow-y: scroll;
+  margin-top: 40px;
+
+  /* Transparent scrollbar */
+  scrollbar-width: none; /* For Firefox */
+  scrollbar-color: transparent transparent; /* For Firefox */
+}
+
+.entry {
+  margin-top: 5px;
+  overflow: auto;
+}
+
+.winner {
+  background: #CDFFBB;
+}
+
+/* Add to your stylesheet */
+.ethLogo {
+  width: 12px; /* Adjust size as needed */
+  height: auto;
+  margin-left: 5px; /* Space between the number and the logo */
+  vertical-align: middle; /* Aligns with the middle of the text */
+  position: relative;
+  top: -2px;
+}
+
+/* Fade In */
+.page2 > *, .page3 > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.fadeIn > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* FOOTBAR */
+.footbar {
+  width: 100%;
+  background: white;
+  display: flex;
+  align-items: center; /* Aligns items vertically in the center */
+  justify-content: space-between; /* Puts maximum space between flex items */
+}
+
+.footbarButton {
+  border-radius: 100px;
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5) !important;
+}
+
+.footbar > .buttonGroup:last-child {
+  margin-right: 10px;
+}
+
+/* Adjust layout for large screens */
+@media (min-height: 1200px) {
+  /* PAGE 1 */
+  .slogan {
+    font-size: 80px;
+  }
+
+  .infoText {
+    font-size: 28px;
+  }
+
+  .donationAmount {
+    font-size: 30px;
+  }
+
+  #startPlaying {
+    font-size: 24px;
+  }
+
+  #becomePartner {
+    font-size: 24px;
+  }
+  
+  .elements {
+    width: 700px;
+    height: 700px;
+  }
+
+  .earth {
+    width: 700px;
+    height: 700px;
+  }
+
+  .backCoin, .middleCoin {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .backCoin {
+    left: 390px;
+    top: 160px;
+    z-index: -1;
+  }
+  
+  .middleCoin {
+    left: 430px;
+    top: 160px;
+  }
+  
+  .frontCoin {
+    width: 110px;
+    height: 110px;
+    left: 460px;
+    top: 170px;
+  }
+  
+  .hearts {
+    left: 100px;
+    bottom: 100px;
+  }
+
+  /* PAGE 2 */
+  .sectionHeader {
+    font-size: 70px;
+  }
+
+  #charityInfo {
+    font-size: 28px;
+  }
+
+  /* PAGE 3 */
+  .leaderboardText {
+    font-size: 24px;
+  }
+}
+
+/* Adjust layout for small screens */
+@media (max-width: 1200px) {
+  .slogan {
+    font-size: 50px;
+  }
+
+  .infoText {
+    font-size: 22px;
+  }
+
+  .donationAmount {
+    font-size: 24px;
+  }
+
+  #startPlaying {
+    font-size: 20px;
+  }
+
+  #becomePartner {
+    font-size: 20px;
+  }
+
+  /* PAGE 2 */
+  .page2 {
+    flex-direction: column-reverse;
+  }
+
+  .charitySectionInfo {
+    width: 100%;
+    margin-bottom: 50px;
+  }
+
+  .wrapper {
+    margin-bottom: 100px;
+  }
+
+  .cardContainer {
+    margin-left: 0px;
+  }
+
+  .sectionHeader {
+    font-size: 40px;
+  }
+
+  #charityInfo {
+    font-size: 20px;
+  }
+}
+
+/* Adjust layout for very small screens */
+@media (max-width: 1050px) {
+  .slogan {
+    font-size: 41px;
+  }
+
+  .infoText {
+    font-size: 21px;
+  }
+
+  .donationAmount {
+    font-size: 23px;
+  }
+
+  #startPlaying {
+    font-size: 19px;
+  }
+
+  #becomePartner {
+    font-size: 19px;
+  }
+
+  .page2 {
+    flex-direction: column-reverse;
+  }
+
+  .charitySectionInfo {
+    width: 100%;
+    margin-bottom: 50px;
+  }
+
+  .wrapper {
+    margin-bottom: 100px;
+  }
+
+  .cardContainer {
+    margin-left: 0px;
+  }
+
+  .elements {
+    width: 400px;
+    height: 400px;
+  }
+
+  .earth {
+    position: relative;
+    top: -60px;
+    width: 400px;
+    height: 400px;
+  }
+
+  .backCoin {
+    left: 190px;
+    top: 0px;
+    z-index: -1;
+  }
+  
+  .middleCoin {
+    left: 230px;
+    top: 0px;
+  }
+  
+  .frontCoin {
+    left: 260px;
+    top: 10px;
+  }
+  
+  .hearts {
+    left: 20px;
+    bottom: 60px;
+  }
+}
+
+/* Show both leaderboards on larger screens */
+@media (min-width: 901px) {
+  .leaderboard {
+    opacity: 1 !important; /* Override any inline styles */
+    left: 0px !important;
+  }
+}
+
+/* Adjust layout for tablet screens */
+@media (max-width: 900px) {
+  .main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+  }
+
+  .info {
+    margin-left: 0;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .slogan {
+    font-size: 60px;
+  }
+
+  .info > .infoText {
+    font-size: 20px;
+    text-align: center;
+    color: white;
+
+    text-shadow: 0px 4px 4px rgb(0, 0, 0, 0.25);
+  }
+
+  .donationAmount {
+    font-size: 22px;
+  }
+
+  #startPlaying {
+    font-size: 20px;
+  }
+
+  #becomePartner {
+    font-size: 20px;
+    margin-left: 0;
+  }
+
+  .visual {
+    position: relative;
+    top: -330px;
+    z-index: 0;
+  }
+
+  .leaderboards {
+    width: 404px;
+  }
+}
+
+/* Adjust layout for mobile screens */
+@media (max-width: 700px) {
+  .header {
+    opacity: 0;
+  }
+
+  .slogan {
+    min-width: 409px;
+  }
+
+  #distinguish::before { 
+    content: ""; 
+    display: block;
+    white-space: pre; 
+  }
+
+  .slogan {
+    text-align: center;
+    font-size: 50px;
+    min-height: 150px;
+  }
+
+  .info {
+    margin-top: -50px;
+  }
+
+  .wrapper {
+    min-width: 360px;
+  }
+  
+  .cardContainer {
+    width: 360px;
+  }
+
+  .cardWrapper {
+    width: 360px;
+  }
+
+  .charitySectionInfo {
+    margin: 0;
+    margin-bottom: 25px;
+  }
+
+  .leaderboardText {
+    font-size: 20px;
+    width: 100%;
+  }
+
+  .footbar {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+    padding-top: 25px;
+  }
+}

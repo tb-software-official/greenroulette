@@ -1,0 +1,210 @@
+/* BettingComponent.module.css */
+* {
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-color: #f4f4f4;
+  overflow: hidden;
+  transition: opacity 1s ease-in;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Full viewport height */
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.container.loaded {
+  opacity: 1;
+}
+
+.content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 420px;
+  height: 300px;
+  z-index: 0;
+}
+
+.info {
+  position: relative;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #CDFFBB 0%, #FFFFFF 100%);
+  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.5);
+  height: 150px;
+  margin: 0 auto;
+  padding: 0px;
+  overflow: visible; /* Make sure it does not cut off content */
+}
+
+.logo {
+  width: 1000px; /* Adjust as needed */
+}
+
+.line {
+  position: relative;
+  margin: 0;
+  border: none;
+  border: 1px solid #FFFFFF;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  background: #FFFFFF;
+  z-index: 10;
+}
+
+.status, .timer {
+  align-items: flex-start; /* Aligns children to the left */
+  justify-content: flex-start; /* Starts children from the top */
+  position: relative;
+  top: -1px;
+  width: 100%;
+  height: 75px;
+}
+
+/* Styles specifically for the labels */
+.label {/* Status */
+  align-self: flex-start; /* Ensures the label aligns to the start */
+  width: 100%;
+  margin: 0; /* Removes any default margin */
+  margin-left: 5px;
+  padding: 0; /* Adjust padding as needed */
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 150%;
+  color: rgba(0, 0, 0, 0.25);
+}
+
+/* Styles for the status indicator and timer display */
+.info_text {
+  text-align: center;
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  margin: auto auto 0; /* Centers horizontally and adds margin to the top */
+}
+
+#timer {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 35px;
+  line-height: 150%;
+  /* or 38px */
+
+  color: #000000;
+
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+
+  background: linear-gradient(0deg, #FFFFFF, #248900);
+
+  transition: background 1s ease-in-out;
+
+  /* background-size: 200% 200%; */
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 3px transparent;
+}
+
+#joinLateText {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 150%;
+
+  background: linear-gradient(180deg, #CDFFBB 0%, rgba(0, 194, 255, 0.25) 87.36%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+
+  -webkit-text-stroke: 0.25px #000000;
+}
+
+/* CHAT / SETTTINGS / LEADERBOARD COMPONENTS */
+.popUpContainer {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.25s ease-in-out;
+}
+
+#x {
+  cursor: pointer;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 150%;
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+
+.popUpHeader {
+  color: white;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Horizontal offset, vertical offset, blur radius, color */
+  overflow: visible;
+}
+
+.entry {
+  padding: 0px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  overflow: visible;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.entryAmount {
+  background: linear-gradient(180deg, #CDFFBB 50%, #248900 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+
+  -webkit-text-stroke: 0.35px #000000;
+}
+
+
+#spinner {
+  position: relative;
+  margin: 0 auto;
+  margin-top: 20px;
+  height: 58px;
+  width: 58px;
+}
+
+#spinning {
+  position: absolute;
+  top: 0px;
+  left: 4px;
+  animation: spin 2.5s linear infinite; 
+}
+
+
+/* Adjust layout for mobile screens */
+@media (max-width: 500px) {
+  .content {
+    width: 350px;
+  }
+}
+
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

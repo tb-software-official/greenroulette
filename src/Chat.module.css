@@ -1,0 +1,170 @@
+.chatContainer {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+  height: 400px;
+  z-index: 1000;
+}
+
+/* Adjusted styles to control visibility based on state */
+.chatContainer.closed {
+  transform: translateY(120%); /* Pushes the chat off-screen */
+}
+
+.chatContainer.open {
+  transform: translateY(0); /* Brings the chat into view */
+}
+
+#logo {
+  transform: scale(1.5);
+  position: relative;
+  left: 10px;
+  top: -3px;
+}
+
+.chatHeader {
+  background-color: #00C2FF;
+  z-index: 1000;
+}
+
+.chatTotalBets {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  color: white;
+  font-weight: 500;
+  font-size: 17px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 999;
+  overflow: hidden;
+  height: 46px;
+}
+
+.totalRed {
+  padding: 0px 10px;
+  padding-bottom: 5px;
+  width: 50%;
+  background: linear-gradient(0deg, #CA0000 0%, #FF0000 100%);
+}
+
+.totalBlack {
+  padding: 0px 10px;
+  width: 50%;
+  background: linear-gradient(180deg, #000000 0%, #171717 100%);
+}
+
+#labelRed {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.25);
+}
+
+#labelBlack {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+#logoSmall {
+  width: 80px;
+}
+
+#userInfo {
+  font-size: 10px;
+}
+
+.messages {
+  height: 250px;
+  flex-grow: 1;
+  padding: 0px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: #EAEAEA;
+  display: flex;
+  flex-direction: column;
+}
+
+.message {
+  margin-bottom: 5px;
+  padding: 5px 10px;
+}
+
+.message.you {
+  background: none;
+  float: right;
+  text-align: right;
+}
+
+.messageContent {
+  float: left;
+  padding: 10px;
+  font-size: 12px;
+  max-width: 80%;
+  overflow-x: auto;
+  text-align: left;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  background: white;
+}
+
+.messageContent.betMessage {
+  float: none;
+  margin: 0 auto; /* Center the bet message */
+  width: 90%;
+  font-weight: bold;
+  font-size: 10px;
+  text-align: center;
+  color: white;
+}
+
+.messageContent.betMessage.guessRed {
+  background: linear-gradient(0deg, #CA0000 0%, #FF0000 100%);
+}
+
+.messageContent.betMessage.guessBlack {
+  background: linear-gradient(180deg, #000000 0%, #171717 100%);
+}
+
+.messageContent.you {
+  background: linear-gradient(90.02deg, #CDFFBB 0.02%, #00C2FF 224.65%);
+}
+
+.you {
+  float: right;
+  color: black;
+}
+
+.inputArea {
+  display: flex;
+  padding: 10px;
+  background: #EAEAEA;
+  box-shadow: 0 -4px 8px rgba(0,0,0,0.1);
+}
+
+.inputArea input {
+  flex-grow: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 18px;
+  margin-right: 5px;
+}
+
+.inputArea svg {
+  padding: 8px 10px;
+  border: none;
+  cursor: pointer;
+  transform: scale(1.7);
+}
+
+.partner {
+  font-weight: 800;
+  background: linear-gradient(180deg, #FF7676 0%, #FFCF54 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}

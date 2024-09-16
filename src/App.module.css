@@ -1,0 +1,9 @@
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;  /* This makes the app fill the entire height of the viewport */
+  padding: 20px;
+  background-color: #f0f0f0; /* Optional: adds a background color to the entire app */
+  font-family: Arial, sans-serif; /* Ensures consistent font throughout the app */
+}

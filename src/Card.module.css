@@ -1,0 +1,42 @@
+.card {
+  flex-shrink: 0;
+  width: 250px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  height: 80%;
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  border-radius: 10px;
+  margin: 0px 30px;
+  
+  position: relative;
+  left: 8px;
+  top: 20px;
+}
+
+.charityLogo {
+  width: auto; /* Adjust the size as needed */
+  height: 40px; /* Keeps the aspect ratio of the image */
+  margin-bottom: 10px; /* Adds space between the logo and the text */
+}
+
+.black {
+  background: linear-gradient(0.14deg, #CDFFBB -46.4%, #FFFFFF 56.73%);
+}
+
+.red {
+  background: linear-gradient(0.14deg, #00C2FF -46.4%, #FFFFFF 56.73%);
+}
+
+.card p {
+  margin-top: 10px;
+  text-align: justify; /* Justify text for better readability */
+  overflow-wrap: break-word; /* Ensures text breaks properly */
+  margin: 0; /* Removes default margin */
+  width: 100%; /* Ensures text uses full width of the card */
+}
