@@ -14,11 +14,14 @@ const port = process.env.PORT || 6969;
 
 // Middleware
 app.use(helmet());
-app.use(cors({
-  origin: ['https://greenroulette.io'], // Replace with your frontend's domain
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+app.use(
+  cors({
+    origin: ['https://greenroulette.io', 'https://www.greenroulette.io'], // Allow both domains
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Ensure all methods you use are allowed
+    allowedHeaders: ['Content-Type', 'Authorization'], // Include any custom headers
+    credentials: true, // If you need to send cookies or HTTP auth information
+  })
+);
 app.use(bodyParser.json());
 
 // Rate Limiting
