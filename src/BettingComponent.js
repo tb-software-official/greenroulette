@@ -23,7 +23,7 @@ const socket = io('https://greenroulette.io:3001', { secure: true });
 
 // Create an instance of axios with a base URL
 const database_api = axios.create({
-  baseURL: 'https://localhost:6969/'
+  baseURL: 'https://greenroulette.io:6969/'
 });
 
 function BettingComponent({ web3, isChatOpen, setIsChatOpen, userAddress, unreadCounter }) {

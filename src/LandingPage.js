@@ -34,7 +34,7 @@ import CountdownCircle from './CountdownCircle';
 
 // Create an instance of axios with a base URL
 const database_api = axios.create({
-  baseURL: 'https://localhost:6969/'
+  baseURL: 'https://greenroulette.io:6969/'
 });
 
 function LandingPage() {

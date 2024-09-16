@@ -17,7 +17,7 @@ const contractAddress = "0xa390Afb2bA2e7c4bFfddCB8Fb0b3d9e51a11FeD0";
 
 // Create an instance of axios with a base URL
 const database_api = axios.create({
-  baseURL: 'https://localhost:6969/'
+  baseURL: 'https://greenroulette.io:6969/'
 });
 
 ChartJS.register(ArcElement, Tooltip, Legend);
