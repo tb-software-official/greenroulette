@@ -46,18 +46,27 @@ To run GreenRoulette locally, follow these steps:
 4. **Run the Timer Server**: Start the backend server that manages the game's state and fetches random numbers:
 
    ```bash
-   node timerServer.js
+   node timer.js
    ```
-
-5. **Run the React Application**: Navigate to the client directory and start the React application:
+5. **Run the Database Server**:
 
    ```bash
-   cd client
+   node database.js
+   ```
+6. **Run the Chat Server**:
+
+   ```bash
+   node chat_server.js
+   ```
+
+7. **Run the React Application**: Start the React application:
+
+   ```bash
    npm install
    npm start
    ```
 
-6. **Access the Application**: Open your browser and navigate to `http://localhost:3000` to see GreenRoulette in action.
+8. **Access the Application**: Open your browser and navigate to `http://localhost:3000` to see GreenRoulette in action.
 
 ## Usage
 
