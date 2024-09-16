@@ -1,70 +1,88 @@
-# Getting Started with Create React App
+# GreenRoulette
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+GreenRoulette is a decentralized application (dApp) built on the Ethereum blockchain that combines gaming with philanthropy. Players can bet on a game of chance while contributing to charitable causes. By staking ETH, users can become partners and earn a share of the pool each month. The platform is designed to be transparent, fair, and community-driven.
 
-## Available Scripts
+## Key Features
 
-In the project directory, you can run:
+- **Decentralized and Transparent**: GreenRoulette leverages Ethereum smart contracts to ensure fairness and transparency in every game.
+- **Charity Support**: 4% of the total pool is donated to various charities every month, allowing users to support meaningful causes while playing.
+- **Partner Rewards**: 1% of the pool is distributed to partners who stake their ETH. The rewards are proportional to the amount staked compared to the total amount staked by all partners.
+- **Secure Random Number Generation**: Utilizes Flare's FTSO to provide secure, unbiased random numbers for game outcomes.
 
-### `npm start`
+## How It Works
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. **Betting**: Users place their bets on either red or black in a roulette-style game.
+2. **Random Number Generation**: The outcome is determined using a secure random number provided by Flare's FTSO, ensuring a fair and tamper-proof game.
+3. **Monthly Distribution**:
+   - **4%** of the total pool is donated to charities.
+   - **1%** goes to the house.
+   - **1%** is distributed among partners who have staked their ETH.
+4. **Earnings for Partners**: Partners who stake ETH earn rewards proportional to their stake size relative to the total staked amount.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation
 
-### `npm test`
+To run GreenRoulette locally, follow these steps:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/tb-software-official/GreenRoulette.git
+   cd GreenRoulette
+   ```
+2. **Install Dependencies**: Make sure you have Node.js installed. Then, run:
 
-### `npm run build`
+   ```bash
+   npm install
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. **Set Up Environment Variables**: Create a `.env` file in the root directory and configure the necessary environment variables:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   ```env
+   INFURA_URL=<Your Infura URL>
+   PRIVATE_KEY_HOUSE=<Your Private Key>
+   CRYPTO_COMPARE_API_KEY=<Your CryptoCompare API Key>
+   DB_PASS=<Your Database Password>
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. **Run the Timer Server**: Start the backend server that manages the game's state and fetches random numbers:
 
-### `npm run eject`
+   ```bash
+   node timerServer.js
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+5. **Run the React Application**: Navigate to the client directory and start the React application:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   ```bash
+   cd client
+   npm install
+   npm start
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+6. **Access the Application**: Open your browser and navigate to `http://localhost:3000` to see GreenRoulette in action.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Usage
 
-## Learn More
+- **Play the Game**: Place bets on red or black and see if you win based on the securely generated random number.
+- **Stake ETH**: Become a partner by staking ETH and earn rewards from the pool every month.
+- **Support Charities**: Know that 4% of the pool goes to charities, supporting meaningful causes with every bet.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Contributing
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Contributions are welcome! To contribute to GreenRoulette:
 
-### Code Splitting
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Commit your changes (`git commit -m 'Add new feature'`).
+4. Push to the branch (`git push origin feature-branch`).
+5. Create a new Pull Request.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## License
 
-### Analyzing the Bundle Size
+This project is licensed under the GNU General Public License v3.0. See the LICENSE file for more details.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Disclaimer
 
-### Making a Progressive Web App
+GreenRoulette is a decentralized application running on the Ethereum blockchain. Participation is at your own risk, and you should only bet what you can afford to lose. Please be aware of local regulations regarding gambling and online gaming.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Contact
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+For questions or support, please open an issue in the repository or reach out via the discussion board.
