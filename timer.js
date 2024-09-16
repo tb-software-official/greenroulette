@@ -21,8 +21,10 @@ const server = https.createServer({
 
 const io = socketIo(server, {
   cors: {
-    origin: "https://greenroulette.io",  // Update to your domain
-    methods: ["GET", "POST"]
+    origin: ['https://greenroulette.io', 'https://www.greenroulette.io'], // Allow both domains
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Ensure all methods you use are allowed
+    allowedHeaders: ['Content-Type', 'Authorization'], // Include any custom headers
+    credentials: true, // If you need to send cookies or HTTP auth information
   }
 });
 
