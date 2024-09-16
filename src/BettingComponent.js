@@ -19,11 +19,11 @@ import { ReactComponent as RouletteSpinning } from './images/roulette_spinning.s
 const contractAddress = "0xa390Afb2bA2e7c4bFfddCB8Fb0b3d9e51a11FeD0";
 
 // Initialize socket connection
-const socket = io('https://localhost:3001', { secure: true });
+const socket = io('https://greenroulette.io:3001', { secure: true });
 
 // Create an instance of axios with a base URL
 const database_api = axios.create({
-  baseURL: 'http://localhost:6969/'
+  baseURL: 'https://localhost:6969/'
 });
 
 function BettingComponent({ web3, isChatOpen, setIsChatOpen, userAddress, unreadCounter }) {

@@ -10,7 +10,7 @@ import io from 'socket.io-client';
 import JoinLateNotice from './JoinLateNotice';
 
 // Initialize socket connection
-const socket = io('https://localhost:3001', { secure: true });
+const socket = io('https://greenroulette.io:3001', { secure: true });
 
 function TransactionComponent() {
   const navigate = useNavigate();

@@ -10,7 +10,7 @@ import Confetti from 'react-confetti';  // Import the Confetti component
 import { useWindowSize } from 'react-use';  // Import hook to get window size
 
 // Initialize socket connection
-const socket = io('https://localhost:3001', { secure: true });
+const socket = io('https://greenroulette.io:3001', { secure: true });
 
 const redNumbers = new Set([32, 19, 21, 25, 34, 27, 36, 30, 23, 5, 16, 1, 14, 9, 18, 7, 12, 3]);
 const blackNumbers = new Set([15, 4, 2, 17, 6, 13, 11, 8, 10, 24, 33, 20, 31, 22, 29, 28, 35, 26]);

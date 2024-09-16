@@ -1,43 +1,66 @@
 require('dotenv').config();
 const express = require('express');
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const validator = require('validator');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 
 const app = express();
 const port = process.env.PORT || 6969;
 
 // Middleware
-app.use(cors());
+app.use(helmet());
+app.use(cors({
+  origin: ['https://greenroulette.io'], // Replace with your frontend's domain
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(bodyParser.json());
 
+// Rate Limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // Limit each IP to 100 requests per windowMs
+});
+app.use(limiter);
+
+// Function to validate and sanitize input
 const validateAndSanitizeInput = (input) => {
-  if (!input || typeof input !== 'string' || !validator.isAlphanumeric(input, 'en-US', {ignore: ' .-_'})) {
-      return false;
+  if (!input || typeof input !== 'string' || !validator.isAlphanumeric(input, 'en-US', { ignore: ' .-_' })) {
+    return false;
   }
   return validator.trim(input);
 };
 
-
-// Create a MySQL connection
+// Create a MySQL connection pool with better error handling
 const pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
-  password: process.env.DB_PASS, // Your MySQL password
-  database: 'GreenRoulette'
+  password: process.env.DB_PASS, // Ensure this is securely stored
+  database: 'greenroulette',
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 });
 
 // Verify MySQL connection
-pool.getConnection((err, connection) => {
-  if (err) throw err;
-  console.log('Connected as ID ' + connection.threadId);
-  connection.release();
-});
+pool.getConnection()
+  .then(connection => {
+    console.log('Connected to MySQL as ID ' + connection.threadId);
+    connection.release();
+  })
+  .catch(err => console.error('Error connecting to MySQL:', err));
 
-// Route to handle adding a new player
-app.post('/api/add-player', (req, res) => {
+// Route to handle adding a new player with parameterized queries
+app.post('/api/add-player', async (req, res) => {
   const { address } = req.body;
+  
+  if (!validator.isEthereumAddress(address)) {
+    return res.status(400).json({ error: 'Invalid Ethereum address' });
+  }
+
   const query = `
     INSERT INTO players (address, username, total_win, total_donated)
     SELECT * FROM (SELECT ? as address, NULL as username, 0.00000000 as total_win, 0.00000000 as total_donated) AS tmp
@@ -45,31 +68,38 @@ app.post('/api/add-player', (req, res) => {
       SELECT address FROM players WHERE address = ?
     ) LIMIT 1;
   `;
-  pool.query(query, [address, address], (error, results) => {
-    if (error) {
-      return res.status(500).json({ error: error.message });
-    }
+  
+  try {
+    const [results] = await pool.query(query, [address, address]);
     res.json({ message: 'Player added', results });
-  });
+  } catch (error) {
+    console.error('Error adding player:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
-app.post('/api/update-username', (req, res) => {
+// Update username securely
+app.post('/api/update-username', async (req, res) => {
   const { username, userAddress } = req.body;
 
+  if (!validator.isEthereumAddress(userAddress)) {
+    return res.status(400).json({ error: 'Invalid Ethereum address' });
+  }
+
   let sanitizedUsername = validateAndSanitizeInput(username);
-  
   if (!sanitizedUsername) {
     sanitizedUsername = null;
   }
 
   const sql = `UPDATE players SET username = ? WHERE address = ?`;
-  pool.query(sql, [sanitizedUsername, userAddress], (error, results) => {
-      if (error) {
-          console.error('Failed to update username:', error);
-          return res.status(500).send({ success: false });
-      }
-      res.send({ success: true });
-  });
+  
+  try {
+    const [results] = await pool.query(sql, [sanitizedUsername, userAddress]);
+    res.send({ success: true });
+  } catch (error) {
+    console.error('Failed to update username:', error);
+    res.status(500).send({ success: false });
+  }
 });
 
 app.post('/api/donations', (req, res) => {
@@ -339,7 +369,11 @@ app.post('/api/remove_partner', (req, res) => {
   });
 });
 
-// Start the server
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+const httpsOptions = {
+  key: fs.readFileSync('/etc/letsencrypt/live/greenroulette.io/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/greenroulette.io/fullchain.pem'),
+};
+
+https.createServer(httpsOptions, app).listen(port, () => {
+  console.log(`Secure server running on https://localhost:${port}`);
 });

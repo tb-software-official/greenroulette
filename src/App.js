@@ -16,7 +16,7 @@ import Chat from './Chat';
 
 import axios from 'axios';
 const database_api = axios.create({
-  baseURL: 'http://localhost:6969/'
+  baseURL: 'https://localhost:6969/'
 });
 
 function App() {

@@ -10,8 +10,8 @@ import { ReactComponent as Send } from './images/send.svg'
 import { GameContext } from './GameContext';
 import logo from './images/logo.svg';
 
-const socket = io('http://localhost:3002');
-const timer = io('https://localhost:3001', { secure: true });
+const socket = io('https://greenroulette.io:3002');
+const timer = io('https://greenroulette.io:3001', { secure: true });
 
 timer.on('connect', () => {
   console.log('Connected to the server');
@@ -19,7 +19,7 @@ timer.on('connect', () => {
 
 // Create an instance of axios with a base URL
 const database_api = axios.create({
-  baseURL: 'http://localhost:6969/'
+  baseURL: 'https://localhost:6969/'
 });
 
 const roundTwoDecimals = (number) => {

@@ -17,7 +17,7 @@ const redNumbers = new Set([32, 19, 21, 25, 34, 27, 36, 30, 23, 5, 16, 1, 14, 9,
 const adjustedNumbers = "0-32-15-19-4-21-2-25-17-34-6-27-13-36-11-30-8-23-10-5-24-16-33-1-20-14-31-9-22-18-29-7-28-12-35-3-26".split('-');
 
 // Initialize socket connection
-const socket = io('https://localhost:3001', { secure: true });
+const socket = io('https://greenroulette.io:3001', { secure: true });
 
 const calculateTransform = (winningNumber) => {
   const baseTranslation = -9842 - 45; // Base translation for two full rotations

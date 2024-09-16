@@ -15,12 +15,13 @@ const blackNumbers = new Set([15, 4, 2, 17, 6, 13, 11, 8, 10, 24, 33, 20, 31, 22
 
 const app = express();``
 const server = https.createServer({
-  key: fs.readFileSync('./localhost-key.pem'),
-  cert: fs.readFileSync('./localhost.pem')
+  key: fs.readFileSync('/etc/letsencrypt/live/greenroulette.io/privkey.pem'), // Path to your private key
+  cert: fs.readFileSync('/etc/letsencrypt/live/greenroulette.io/fullchain.pem'), // Path to your full chain certificate
 }, app);
+
 const io = socketIo(server, {
   cors: {
-    origin: "*",  // Be sure to restrict this in production!
+    origin: "https://greenroulette.io",  // Update to your domain
     methods: ["GET", "POST"]
   }
 });

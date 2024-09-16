@@ -34,7 +34,7 @@ import CountdownCircle from './CountdownCircle';
 
 // Create an instance of axios with a base URL
 const database_api = axios.create({
-  baseURL: 'http://localhost:6969/'
+  baseURL: 'https://localhost:6969/'
 });
 
 function LandingPage() {

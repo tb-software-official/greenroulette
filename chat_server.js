@@ -3,14 +3,17 @@ const http = require('http');
 const socketIo = require('socket.io');
 
 const app = express();
-const server = http.createServer(app);
-const io = socketIo(server, {
-    cors: {
-      origin: "*", // Be sure to restrict this in production!
-      methods: ["GET", "POST"]
-    }
-  });
+const server = https.createServer({
+  key: fs.readFileSync('/etc/letsencrypt/live/greenroulette.io/privkey.pem'), // Path to your private key
+  cert: fs.readFileSync('/etc/letsencrypt/live/greenroulette.io/fullchain.pem'), // Path to your full chain certificate
+}, app);
 
+const io = socketIo(server, {
+  cors: {
+    origin: "https://greenroulette.io",  // Update to your domain
+    methods: ["GET", "POST"]
+  }
+});
 const xss = require('xss');
 
 const rateLimit = require('express-rate-limit');
