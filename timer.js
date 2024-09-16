@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const https = require('https');
 const fs = require('fs');
 const express = require('express');
@@ -11,7 +13,7 @@ const abi_roulette = require('./src/abis/rouletteContractAbi.json');
 const redNumbers = new Set([32, 19, 21, 25, 34, 27, 36, 30, 23, 5, 16, 1, 14, 9, 18, 7, 12, 3]);
 const blackNumbers = new Set([15, 4, 2, 17, 6, 13, 11, 8, 10, 24, 33, 20, 31, 22, 29, 28, 35, 26]);
 
-const app = express();
+const app = express();``
 const server = https.createServer({
   key: fs.readFileSync('./localhost-key.pem'),
   cert: fs.readFileSync('./localhost.pem')
