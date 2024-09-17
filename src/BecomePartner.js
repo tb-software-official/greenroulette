@@ -5,6 +5,7 @@ import commonStyles from './CommonStyles.module.css'; // Import CSS module for s
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Logo } from './images/logo.svg';
 import { ReactComponent as Mail } from './images/mail.svg';
+import { ReactComponent as GitHub } from './images/github-brands-solid.svg';
 import { ReactComponent as Explanation } from './images/explaination.svg';
 import rouletteContractAbi from './abis/rouletteContractAbi.json';
 import axios from 'axios';
@@ -545,6 +546,7 @@ function BecomePartner({ web3 }) {
         <div className={styles.buttonGroup}>
           <button className={styles.footbarButton}><Mail /></button>
           <button className={styles.footbarButton}><img src={xLogo} alt="X Logo" /></button>
+          <button className={styles.footbarButton} onClick={() => window.open('https://github.com/tb-software-official/greenroulette', '_blank')}><GitHub width={26} height={20} /></button>
         </div>
       </div>
     </div>
