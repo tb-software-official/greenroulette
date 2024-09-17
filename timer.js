@@ -303,45 +303,21 @@ function startStageZero() {
   }, 1000);
 }
 
-async function checkBettingClosed() {
+function checkBettingClosed() {
   console.log("Setting up BettingClosed event listener.");
-  
-  if (!rouletteContract || !rouletteContract.methods) {
-    console.error("Roulette contract not initialized properly.");
-    return;
-  }
 
   try {
-    // Get the latest block number
-    const latestBlock = await web3.eth.getBlockNumber();
-
-    // Function to handle BettingClosed events
-    const handleBettingClosed = (error, event) => {
-      if (error) {
-        console.error("Error in BettingClosed event:", error);
-        return;
-      }
+    // Create a single subscription to the BettingClosed event
+    rouletteContract.events.BettingClosed({
+      fromBlock: 'latest'
+    })
+    .on('data', event => {
       console.log("Event received. Betting closes in 2 minutes!");
+
+      // Reset and start the secondary timer upon receiving the event
       secondaryTimer = 125;
       startSecondaryTimer();
-    };
-
-    // Check for past events
-    const pastEvents = await rouletteContract.getPastEvents('BettingClosed', {
-      fromBlock: Math.max(0, Number(latestBlock) - 1000), // Ensure it's not negative
-      toBlock: 'latest'
-    });
-
-    if (pastEvents.length > 0) {
-      console.log("Found past BettingClosed event");
-      handleBettingClosed(null, pastEvents[pastEvents.length - 1]);
-    }
-
-    // Subscribe to new events
-    const subscription = web3.eth.subscribe('logs', {
-      address: rouletteContractAddress,
-      topics: [web3.utils.sha3('BettingClosed()')]
-    }, handleBettingClosed);
+    })
 
     console.log("BettingClosed event listener set up successfully.");
   } catch (error) {
