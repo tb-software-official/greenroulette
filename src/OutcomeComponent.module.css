@@ -34,6 +34,7 @@
 
 .sad {
   background: linear-gradient(180deg, #00799F 24.53%, #00C2FF 100%);
+  margin-bottom: 0px !important;
 }
 
 .wonInfo {
@@ -120,9 +121,6 @@
 }
 
 #consolidation {
-  position: absolute;
-  left: 0;
-  right: 0;
+  position: relative;
   margin-left: auto;
-  top: 260px;
 }

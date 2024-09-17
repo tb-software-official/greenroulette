@@ -237,6 +237,68 @@ app.get('/api/total_donated', async (req, res) => {
   }
 });
 
+// Endpoint to update total_donated for a player
+app.post('/api/update_total_donated', async (req, res) => {
+  const { address, amount } = req.body;
+
+  if (!address || amount === undefined) {
+    return res.status(400).json({ error: 'Address and amount are required' });
+  }
+
+  let sanitizedAmount = validateAndSanitizeInput(amount);
+  if (!sanitizedAmount) {
+    return res.status(400).json({ error: 'Invalid amount format. Must be a number with up to 8 decimal places.' });
+  }
+
+  const sql = `
+    UPDATE players 
+    SET total_donated = total_donated + ? 
+    WHERE address = ?
+  `;
+
+  try {
+    const [result] = await pool.query(sql, [sanitizedAmount, address]);
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'Player not found' });
+    }
+    res.json({ message: 'Total donated updated successfully' });
+  } catch (error) {
+    console.error('Error updating total_donated:', error);
+    res.status(500).json({ error: 'Error updating total_donated' });
+  }
+});
+
+// Endpoint to update total_win for a player
+app.post('/api/update_total_win', async (req, res) => {
+  const { address, amount } = req.body;
+
+  if (!address || amount === undefined) {
+    return res.status(400).json({ error: 'Address and amount are required' });
+  }
+
+  let sanitizedAmount = validateAndSanitizeInput(amount);
+  if (!sanitizedAmount) {
+    return res.status(400).json({ error: 'Invalid amount format. Must be a number with up to 8 decimal places.' });
+  }
+
+  const sql = `
+    UPDATE players 
+    SET total_win = total_win + ? 
+    WHERE address = ?
+  `;
+
+  try {
+    const [result] = await pool.query(sql, [sanitizedAmount, address]);
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'Player not found' });
+    }
+    res.json({ message: 'Total win updated successfully' });
+  } catch (error) {
+    console.error('Error updating total_win:', error);
+    res.status(500).json({ error: 'Error updating total_win' });
+  }
+});
+
 // Endpoint to get the username given an address
 app.get('/api/get_username/:address', async (req, res) => {
   const { address } = req.params;

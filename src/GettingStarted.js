@@ -45,6 +45,43 @@ function GettingStarted({ setWeb3, setUserAddress }) {
         // Request account access if needed
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         const web3Instance = new Web3(window.ethereum);
+
+        // Check if the current network is Sepolia
+        const chainId = await web3Instance.eth.getChainId();
+        if (chainId !== 11155111) { // Sepolia chain ID
+          try {
+            // Request to switch to Sepolia
+            await window.ethereum.request({
+              method: 'wallet_switchEthereumChain',
+              params: [{ chainId: '0xaa36a7' }], // Sepolia chain ID in hex
+            });
+          } catch (switchError) {
+            // This error code indicates that the chain has not been added to MetaMask
+            if (switchError.code === 4902) {
+              try {
+                await window.ethereum.request({
+                  method: 'wallet_addEthereumChain',
+                  params: [{
+                    chainId: '0xaa36a7',
+                    chainName: 'Sepolia Test Network',
+                    nativeCurrency: {
+                      name: 'Sepolia Ether',
+                      symbol: 'SEP',
+                      decimals: 18
+                    },
+                    rpcUrls: ['https://sepolia.infura.io/v3/YOUR-PROJECT-ID'],
+                    blockExplorerUrls: ['https://sepolia.etherscan.io']
+                  }],
+                });
+              } catch (addError) {
+                throw new Error("Failed to add Sepolia network");
+              }
+            } else {
+              throw switchError;
+            }
+          }
+        }
+
         setWeb3(web3Instance);
         setUserAddress(accounts[0]);
         setGameState(prevState => ({ ...prevState, userAddress: accounts[0] }));
@@ -68,7 +105,8 @@ function GettingStarted({ setWeb3, setUserAddress }) {
         }
 
       } catch (error) {
-        console.error('Failed to connect to MetaMask', error);
+        console.error('Failed to connect to MetaMask or switch to Sepolia', error);
+        alert('Please switch to the Sepolia test network in MetaMask and try again.');
       }
     } else {
       alert('Please install MetaMask first!');

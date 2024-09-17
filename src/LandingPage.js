@@ -14,6 +14,7 @@ import { ReactComponent as Medal1 } from './images/Medal.svg';
 import { ReactComponent as Medal2 } from './images/Medal_2.svg';
 import { ReactComponent as Medal3 } from './images/Medal_3.svg';
 import { ReactComponent as Mail } from './images/mail.svg';
+import { ReactComponent as GitHub } from './images/github-brands-solid.svg';
 import { ReactTyped } from "react-typed";
 
 import axios from 'axios';
@@ -413,6 +414,7 @@ function LandingPage() {
         <div className={styles.buttonGroup}>
             <button className={styles.footbarButton}><Mail /></button>
             <button className={styles.footbarButton}><img src={xLogo} alt="X logo" /></button>
+            <button className={styles.footbarButton} onClick={() => window.open('https://github.com/tb-software-official/greenroulette', '_blank')}><GitHub width={26} height={20} /></button>
           </div>
       </div>
     </>

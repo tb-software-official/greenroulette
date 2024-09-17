@@ -78,13 +78,13 @@ function OutcomeComponent() {
 
       if (isRed) {
         total_won = gameState.total_red;
-        donated = gameState.total_black * 0.75;
+        donated = gameState.total_black * 0.67;
       } else if (isBlack) {
         total_won = gameState.total_black;
-        donated = gameState.total_red * 0.75;
+        donated = gameState.total_red * 0.67;
       } else {
         total_won = 0;
-        donated = gameState.total_red * 0.75 + gameState.total_black * 0.75;
+        donated = gameState.total_red * 0.67 + gameState.total_black * 0.67;
       }
 
       console.log(total_won);
@@ -116,7 +116,10 @@ function OutcomeComponent() {
         <h1 id={styles.header} className={`${outcome === 0 ? styles.bright : styles.sad}`}>
           {outcome === 0 ? "CONGRATULATIONS!" : (outcome === 1 ? "TRY AGAIN!" : "NO BET DETECTED!")}
         </h1>
-        <span id={styles.consolidation}>{outcome === 1 ? "Don't be sad however..." : ""}</span>
+        <span id={styles.consolidation}>
+          {outcome === 1 ? "Don't be sad however..." : 
+           outcome === 2 ? "Join the next round for a chance to win!" : ""}
+        </span>
         <div className={`${commonStyles.info} ${styles.info}`}>
             <div className={`${commonStyles.status} ${styles.wonInfo}`}>
               <h2 className={styles.title}>
@@ -126,7 +129,7 @@ function OutcomeComponent() {
                 {outcome === 0 ? (
                   <CountUp duration={5} end={valuesRef.current.playerWon} suffix="$" />
                 ) : outcome === 1 ? (
-                  <CountUp duration={5} end={valuesRef.current.playerWon * 0.75} suffix="$" />
+                  <CountUp duration={5} end={valuesRef.current.playerWon * 0.67} suffix="$" />
                 ) : (
                   <CountUp duration={5} end={valuesRef.current.totalWon} suffix="$" />
                 )}

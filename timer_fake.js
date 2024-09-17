@@ -129,7 +129,7 @@ async function prepareForPayout(randomNumber) {
 }
 
 async function fetchRandomNumber() {
-  const randomNumber = Math.floor(Math.random() * 38); 
+  const randomNumber = Math.floor(Math.random() * 37); 
   return randomNumber;
 }
 
