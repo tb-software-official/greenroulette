@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const { Web3 } = require('web3');
 const abi_roulette = require('./src/abis/rouletteContractAbi.json');
 const infuraUrl = process.env.INFURA_URL;
