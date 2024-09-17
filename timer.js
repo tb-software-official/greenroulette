@@ -304,22 +304,27 @@ function startStageZero() {
 }
 
 function checkBettingClosed() {
-  // This creates a subscription to listen for the BettingClosed event
-  const bettingClosedCheck = setInterval(() => {
-    console.log("Checking if betting is closing.");
-    rouletteContract.events.BettingClosed({
-      fromBlock: 'latest'
-    })
-    .on('data', event => {
-      console.log("Event received. Betting closes in 2 minutes!");
+  console.log("Setting up BettingClosed event listener.");
+  
+  // Create a single subscription to the BettingClosed event
+  rouletteContract.events.BettingClosed({
+    fromBlock: 'latest'
+  })
+  .on('data', event => {
+    console.log("Event received. Betting closes in 2 minutes!");
 
-      // Reset and start the secondary timer upon receiving the event
-      clearInterval(bettingClosedCheck);
-      secondaryTimer = 125;
-      startSecondaryTimer();
-      return;
-    })
-  }, 5000);
+    // Reset and start the secondary timer upon receiving the event
+    secondaryTimer = 125;
+    startSecondaryTimer();
+  })
+  .on('error', error => {
+    console.error("Error in BettingClosed event listener:", error);
+  });
+
+  // Optional: Log a message every 30 seconds to show the listener is active
+  setInterval(() => {
+    console.log("Still listening for BettingClosed event...");
+  }, 30000);
 }
 
 function noBets() {
