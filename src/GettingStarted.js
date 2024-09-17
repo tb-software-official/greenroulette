@@ -48,12 +48,12 @@ function GettingStarted({ setWeb3, setUserAddress }) {
 
         // Check if the current network is Sepolia
         const chainId = await web3Instance.eth.getChainId();
-        if (chainId !== 11155111) { // Sepolia chain ID
+        if (chainId !== 10) { // Optimism chain ID
           try {
-            // Request to switch to Sepolia
+            // Request to switch to Optimism
             await window.ethereum.request({
               method: 'wallet_switchEthereumChain',
-              params: [{ chainId: '0xaa36a7' }], // Sepolia chain ID in hex
+              params: [{ chainId: '0xa' }], // Optimism chain ID in hex
             });
           } catch (switchError) {
             // This error code indicates that the chain has not been added to MetaMask
@@ -62,19 +62,19 @@ function GettingStarted({ setWeb3, setUserAddress }) {
                 await window.ethereum.request({
                   method: 'wallet_addEthereumChain',
                   params: [{
-                    chainId: '0xaa36a7',
-                    chainName: 'Sepolia Test Network',
+                    chainId: '0xa',
+                    chainName: 'Optimism',
                     nativeCurrency: {
-                      name: 'Sepolia Ether',
-                      symbol: 'SEP',
+                      name: 'Ethereum',
+                      symbol: 'ETH',
                       decimals: 18
                     },
-                    rpcUrls: ['https://sepolia.infura.io/v3/YOUR-PROJECT-ID'],
-                    blockExplorerUrls: ['https://sepolia.etherscan.io']
+                    rpcUrls: ['https://mainnet.optimism.io'],
+                    blockExplorerUrls: ['https://optimistic.etherscan.io']
                   }],
                 });
               } catch (addError) {
-                throw new Error("Failed to add Sepolia network");
+                throw new Error("Failed to add Optimism network");
               }
             } else {
               throw switchError;
@@ -106,7 +106,7 @@ function GettingStarted({ setWeb3, setUserAddress }) {
 
       } catch (error) {
         console.error('Failed to connect to MetaMask or switch to Sepolia', error);
-        alert('Please switch to the Sepolia test network in MetaMask and try again.');
+        alert('Please switch to the Optimism network in MetaMask and try again.');
       }
     } else {
       alert('Please install MetaMask first!');

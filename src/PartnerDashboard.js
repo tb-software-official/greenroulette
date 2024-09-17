@@ -13,7 +13,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 
 import ethereumLogo from './images/ethereum_logo.png';
 
-const contractAddress = "0xa390Afb2bA2e7c4bFfddCB8Fb0b3d9e51a11FeD0";
+const contractAddress = "0xfCBA36DB3ED62653b80da3Ab50a074Ae64083C43";
 
 // Create an instance of axios with a base URL
 const database_api = axios.create({

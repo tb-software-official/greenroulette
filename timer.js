@@ -32,7 +32,7 @@ const io = socketIo(server, {
 // Roulette Contract
 const infuraUrl = process.env.INFURA_URL;
 const privateKey = process.env.PRIVATE_KEY_HOUSE;
-const rouletteContractAddress = "0xa390Afb2bA2e7c4bFfddCB8Fb0b3d9e51a11FeD0";
+const rouletteContractAddress = "0xfCBA36DB3ED62653b80da3Ab50a074Ae64083C43";
 
 // Define constants for the Flare network
 const FLARE_CONTRACTS = "@flarenetwork/flare-periphery-contract-artifacts";

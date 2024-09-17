@@ -27,7 +27,6 @@ contract Roulette {
 
     address[] public charities;
     uint256 public totalDonated;
-    AggregatorV3Interface internal priceFeed;
 
     event BettingClosed(uint256 closedAt);
 
@@ -38,19 +37,6 @@ contract Roulette {
         totalDonated = 0;
         totalPartnerContributions = 0;
         totalRewardsDistributedToPartners = 0;
-        priceFeed = AggregatorV3Interface(0x694AA1769357215DE4FAC081bf1f309aDC325306);
-    }
-
-    // Function to get the current ETH/USD price
-    function getLatestPrice() public view returns (uint256) {
-        (, int price, , ,) = priceFeed.latestRoundData();
-        return uint256(price / 1e8);  // Price feed returns with 8 decimal places
-    }
-
-    // Function to convert ETH amount to USD amount
-    function ethToUsd(uint256 ethAmount) public view returns (uint256) {
-        uint256 ethPrice = getLatestPrice();
-        return (ethAmount * ethPrice) / 1e18;  // Convert wei to ether
     }
 
     modifier onlyOwner() {
@@ -93,12 +79,17 @@ contract Roulette {
 
     // Internal function to remove a partner from the array
     function removePartner(address partner) private {
-        for (uint i = 0; i < partners.length; i++) {
+        uint length = partners.length;
+
+        for (uint i = 0; i < length; ) {
             if (partners[i] == partner) {
                 partners[i] = partners[partners.length - 1]; // Replace with the last element
                 partners.pop(); // Remove the last element
                 break;
             }
+
+            unchecked { ++i; } // Use unchecked block to save gas
+
         }
     }
 
@@ -136,19 +127,27 @@ contract Roulette {
 
         // First, determine payouts and update the state before any transfers.
         uint256[] memory payouts = new uint256[](bettors.length);
-        for (uint i = 0; i < bettors.length; i++) {
+        uint length = bettors.length;
+
+        for (uint i = 0; i < length; ) {
             address bettor = bettors[i];
             if (playerBets[bettor].guess == outcome_game) {
                 payouts[i] = playerBets[bettor].amount * 2;
             }
             delete playerBets[bettor];  // Cleanup state upfront
+
+            unchecked { ++i; } // Use unchecked block to save gas
+
         }
 
         // After state is cleaned up, then transfer payouts
-        for (uint i = 0; i < bettors.length; i++) {
+        for (uint i = 0; i < length; ) {
             if (payouts[i] > 0) {
                 payable(bettors[i]).transfer(payouts[i]);
             }
+
+            unchecked { ++i; } // Use unchecked block to save gas
+
         }
 
         temporaryBalance = address(this).balance;
@@ -162,8 +161,13 @@ contract Roulette {
 
     function removeCharity(uint index) external onlyOwner {
         require(index < charities.length, "Index out of bounds.");
-        for (uint i = index; i < charities.length - 1; i++) {
+        uint length = charities.length - 1;
+
+        for (uint i = index; i < length; ) {
             charities[i] = charities[i + 1];
+
+            unchecked { ++i; } // Use unchecked block to save gas
+
         }
         charities.pop();
     }
@@ -179,14 +183,18 @@ contract Roulette {
 
         if (charities.length >= 1){
             uint256 charityShare = temporaryBalance * 4 / 100;
-            // uint256 donationUsd = ethToUsd(charityShare);
 
-            // totalDonated += donationUsd;
+            totalDonated += charityShare;
 
             uint256 perCharityShare = charityShare / charities.length;
 
-            for (uint i = 0; i < charities.length; i++) {
+            uint length = charities.length;
+
+            for (uint i = 0; i < length; ) {
                 payable(charities[i]).transfer(perCharityShare);
+
+                unchecked { ++i; } // Use unchecked block to save gas
+
             }
 
             distributedSum += charityShare;
@@ -203,13 +211,18 @@ contract Roulette {
     }
 
     function distributePartnerRewards(uint256 partnerShare) private {
-        for (uint i = 0; i < partners.length; i++) {
+        uint length = partners.length;
+
+        for (uint i = 0; i < length; ) {
             address partner = partners[i];
             uint256 partnerContribution = partnerContributions[partner];
             uint256 reward = (partnerContribution * partnerShare) / totalPartnerContributions;
 
             payable(partner).transfer(reward);
             totalRewardsDistributedToPartners += reward;
+
+            unchecked { ++i; } // Use unchecked block to save gas
+
         }
     }
 

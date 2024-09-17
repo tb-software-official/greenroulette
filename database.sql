@@ -21,3 +21,4 @@ CREATE TABLE total_donations (
     total_amount DECIMAL(18, 8) NOT NULL DEFAULT 0.00000000
 );
 
+INSERT INTO total_donations (total_amount) VALUES (0.00000000);

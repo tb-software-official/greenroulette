@@ -16,7 +16,7 @@ import { ReactComponent as Donate } from './images/donate.svg'
 import { ReactComponent as RouletteBack } from './images/roulette_back.svg'
 import { ReactComponent as RouletteSpinning } from './images/roulette_spinning.svg'
 
-const contractAddress = "0xa390Afb2bA2e7c4bFfddCB8Fb0b3d9e51a11FeD0";
+const contractAddress = "0xfCBA36DB3ED62653b80da3Ab50a074Ae64083C43";
 
 // Initialize socket connection
 const socket = io('https://greenroulette.io:3001', { secure: true });
