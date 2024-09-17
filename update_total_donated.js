@@ -9,11 +9,15 @@ const rouletteContract = new web3.eth.Contract(abi_roulette, rouletteContractAdd
 
 async function updateTotalDonations() {
   try {
+    // Create a MySQL connection pool with better error handling
     const pool = mysql.createPool({
-      host: 'localhost',
-      user: 'root',
+      host: '127.0.0.1',
+      user: 'greenroulette',
       password: process.env.DB_PASS,
-      database: 'GreenRoulette'
+      database: 'greenroulette',
+      waitForConnections: true,
+      connectionLimit: 10,
+      queueLimit: 0
     });
 
     const connection = await pool.getConnection();
