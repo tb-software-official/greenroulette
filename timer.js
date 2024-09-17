@@ -304,10 +304,9 @@ function startStageZero() {
 }
 
 function checkBettingClosed() {
-  console.log("Checking if betting is closing.");
   // This creates a subscription to listen for the BettingClosed event
-
   const bettingClosedCheck = setInterval(() => {
+    console.log("Checking if betting is closing.");
     rouletteContract.events.BettingClosed({
       fromBlock: 'latest'
     })
