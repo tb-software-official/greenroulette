@@ -328,7 +328,7 @@ async function checkBettingClosed() {
 
     // Check for past events
     const pastEvents = await rouletteContract.getPastEvents('BettingClosed', {
-      fromBlock: latestBlock - 1000, // Check last 1000 blocks
+      fromBlock: Math.max(0, Number(latestBlock) - 1000), // Ensure it's not negative
       toBlock: 'latest'
     });
 
